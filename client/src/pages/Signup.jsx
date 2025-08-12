@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { FaApple } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
-import axiosInstance from "../api/axios"; // use your configured Axios instance
+import axiosInstance from "../api/axios";
+import backgroundImage from "../assets/background.jpg"; // use your configured Axios instance
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -46,8 +47,8 @@ const Signup = () => {
       // Your backend sends back { email, token }, not a message.
       // Let's create a success message ourselves.
       setSuccess("Account created successfully! Redirecting to login...");
-      
-      // Store the token if you want to log them in automatically 
+
+      // Store the token if you want to log them in automatically
       // localStorage.setItem('token', res.data.token);
 
       setTimeout(() => navigate("/login"), 2000);
@@ -60,8 +61,11 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-[#1a1a2e] min-h-screen flex items-center justify-center text-white font-sans">
-      <div className="flex w-[1000px] bg-[#2e2e4b] rounded-2xl shadow-lg overflow-hidden flex-col md:flex-row">
+    <div
+      className="flex justify-center items-center min-h-screen text-white font-sans"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
+      <div className="flex w-[1000px] bg-[#ffc59e] rounded-2xl shadow-lg overflow-hidden flex-col md:flex-row">
         {/* Image Section */}
         <div className="hidden md:block flex-1">
           <img
@@ -150,7 +154,9 @@ const Signup = () => {
             </button>
 
             {error && <p className="text-red-400 mt-3 text-center">{error}</p>}
-            {success && <p className="text-green-400 mt-3 text-center">{success}</p>}
+            {success && (
+              <p className="text-green-400 mt-3 text-center">{success}</p>
+            )}
 
             <div className="flex items-center my-8 text-[#a0a0c0]">
               <span className="flex-1 border-t border-[#4a4a6e]"></span>

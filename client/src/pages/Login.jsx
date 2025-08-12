@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { FaApple } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
-import axios from "axios"; // Or your configured axiosInstance
+import axios from "axios"; 
+import backgroundImage from '../assets/background.jpg'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const Login = () => {
       if (data.token) {
         // Success! Save the token and navigate.
         localStorage.setItem("authToken", data.token);
-        navigate("/dashboard"); // Or wherever you want to redirect after login
+        navigate("/form"); // Or wherever you want to redirect after login
       }
     } catch (err) {
       // FIX: Use err.response.data.error to match the backend's response
@@ -53,7 +54,7 @@ const Login = () => {
   return (
     <div
       className="flex justify-center items-center min-h-screen text-white font-sans"
-      style={{ backgroundImage: `url(${"../assets/background.jpg"})` }}
+      style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="flex w-[1000px] bg-[#2e2e4b] rounded-2xl overflow-hidden shadow-lg max-md:flex-col max-md:w-[90%]">
         {/* Form Section */}
