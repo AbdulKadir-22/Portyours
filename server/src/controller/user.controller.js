@@ -1,9 +1,22 @@
 const User = require('../models/user.model')
 const jwt = require('jsonwebtoken')
+const ImageKit = require('imagekit');
 
 const createToken = (_id) => {
   return jwt.sign({_id},process.env.SECRET,{expiresIn: '7d'})
 }
+
+const imagekit = new ImageKit({
+    publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+    privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+    urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
+});
+
+
+const getImageKitAuth = (req, res) => {
+    const result = imagekit.getAuthenticationParameters();
+    res.status(200).json(result);
+};
 
 const loginUser = async (req, res) => {
   const {email,password} = req.body
@@ -46,4 +59,4 @@ const getProfile = async (req, res) => {
   }
 };
 
-module.exports = { loginUser, signupUser, getProfile };
+module.exports = { loginUser, signupUser, getProfile,getImageKitAuth };
