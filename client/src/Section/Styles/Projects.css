@@ -1,0 +1,39 @@
+.projects-section {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #ffe3b3;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.projects-header h2 {
+  font-size: 2rem;
+  color: orange;
+  margin-bottom: 0.5rem;
+}
+
+.projects-header p {
+  color: #444;
+  font-size: 20px;
+  margin-bottom: 2rem;
+}
+
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.projects-btn {
+  margin-top: 2rem;
+  display: inline-block;
+  background-color: orange;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  text-decoration: none;
+  border-radius: 20px;
+}
+
+.projects-btn:hover {
+  background-color: #e28c00;
+}

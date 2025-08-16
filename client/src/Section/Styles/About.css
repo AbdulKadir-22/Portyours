@@ -1,0 +1,101 @@
+/* About.css */
+
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 2rem;
+  background: #ffe3b3;
+  gap: 2rem;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.about-text {
+  flex: 1;
+  max-width: 600px;
+}
+
+.about-text h2 {
+  font-size: 2.5rem;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.about-text h3 {
+  font-size: 1.5rem;
+  color: #000000;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.highlight {
+  color: orange;
+  font-weight: 600;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  color: #000000;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.about-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: orange;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.about-btn:hover {
+  background-color: orange;
+}
+
+.about-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-img img {
+  max-width: 100%;
+  width: 300px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .about-img img {
+    width: 200px;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text h2 {
+    font-size: 2rem;
+  }
+
+  .about-text h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 768px){
+  .about-text{
+     padding: 0 90px 0 90px;
+  }
+}

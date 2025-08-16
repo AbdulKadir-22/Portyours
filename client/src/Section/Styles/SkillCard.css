@@ -1,0 +1,24 @@
+.skill-card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 150px;
+  margin: 1rem;
+}
+
+.skill-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.skill-card h4 {
+  margin: 0.3rem 0;
+  font-size: 1.1rem;
+}
+
+.skill-card p {
+  font-size: 0.9rem;
+  color: #666;
+}

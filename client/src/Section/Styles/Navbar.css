@@ -1,0 +1,105 @@
+/* Hamburger (mobile only) */
+.hamburger {
+  font-size: 2rem;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  cursor: pointer;
+  z-index: 2000;
+  color: #333;
+  display: block;
+}
+
+/* Mobile sidebar nav (hidden by default) */
+.mobile-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background-color: #000000;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem 1rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1500;
+}
+
+.mobile-navbar.open {
+  transform: translateX(0);
+}
+
+.mobile-navbar.logo{
+  color: orange;
+  text-decoration: none;
+}
+
+.mobile-navbar .nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Overlay behind mobile sidebar */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1400;
+}
+
+/* Desktop navbar */
+.top-navbar {
+  display: none;
+}
+
+/* Nav link style */
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+}
+
+.nav-links a:hover {
+  background-color: #f0f0f0;
+  color: orange;
+}
+
+/* Responsive behavior */
+@media (min-width: 768px) {
+  .hamburger,
+  .mobile-navbar,
+  .overlay {
+    display: none;
+  }
+
+  .top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #000000;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .top-navbar .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    font-weight: 700;
+  }
+
+  .top-navbar .logo a {
+    color: orange;
+    font-size: 2.0rem;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
