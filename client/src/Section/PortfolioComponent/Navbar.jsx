@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+// DELETED: import { NavLink } from "react-router-dom";
 import "../styles/Navbar.css";
 
 function Navbar() {
@@ -8,41 +8,37 @@ function Navbar() {
   const toggleNavbar = () => setIsOpen(!isOpen);
   const closeNavbar = () => setIsOpen(false);
 
+  // ✨ Helper to create links, avoids repetition
+  const navLinks = [
+    { href: "#home", text: "Home" },
+    { href: "#about", text: "About" },
+    { href: "#skills", text: "Skills" },
+    { href: "#projects", text: "Projects" },
+    { href: "#contact", text: "Contact" },
+  ];
+
   return (
     <>
-      {/* Hamburger menu for mobile */}
-      <div className="hamburger" onClick={toggleNavbar}>
-        ☰
-      </div>
-
-      {/* Overlay for mobile */}
+      <div className="hamburger" onClick={toggleNavbar}>☰</div>
       {isOpen && <div className="overlay" onClick={closeNavbar}></div>}
 
-      {/* Mobile Sidebar */}
       <nav className={`mobile-navbar ${isOpen ? "open" : ""}`}>
-        <h1 className="logo">
-          <NavLink to="/portfolio" onClick={closeNavbar}>Portfolio</NavLink>
-        </h1>
+        <h1 className="logo"><a href="#home" onClick={closeNavbar}>Portfolio</a></h1>
         <div className="nav-links">
-          <NavLink to="/homeportfolio" className="nav-item" onClick={closeNavbar}>Home</NavLink>
-          <NavLink to="/about" className="nav-item" onClick={closeNavbar}>About</NavLink>
-          <NavLink to="/skills" className="nav-item" onClick={closeNavbar}>Skills</NavLink>
-          <NavLink to="/projects" className="nav-item" onClick={closeNavbar}>Projects</NavLink>
-          <NavLink to="/contact" className="nav-item" onClick={closeNavbar}>Contact</NavLink>
+            {/* ✨ Using anchor tags for scrolling */}
+            {navLinks.map(link => (
+                <a key={link.href} href={link.href} className="nav-item" onClick={closeNavbar}>{link.text}</a>
+            ))}
         </div>
       </nav>
 
-      {/* Navbar for Desktop  */}
       <div className="top-navbar">
-        <h1 className="logo">
-          <NavLink to="/">Portfolio</NavLink>
-        </h1>
+        <h1 className="logo"><a href="#home">Portfolio</a></h1>
         <div className="nav-links">
-          <NavLink to="/homeportfolio" className="nav-item">Home</NavLink>
-          <NavLink to="/about" className="nav-item">About</NavLink>
-          <NavLink to="/skills" className="nav-item">Skills</NavLink>
-          <NavLink to="/projects" className="nav-item">Projects</NavLink>
-          <NavLink to="/contact" className="nav-item">Contact</NavLink>
+            {/* ✨ Using anchor tags for scrolling */}
+            {navLinks.map(link => (
+                <a key={link.href} href={link.href} className="nav-item">{link.text}</a>
+            ))}
         </div>
       </div>
     </>

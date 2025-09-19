@@ -1,26 +1,34 @@
 import React from 'react';
-import '../Styles/Contact.css'
-import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
+import '../Styles/Contact.css';
+import { FaLinkedin, FaGithub, FaTwitter, FaFacebook, FaInstagram, FaEnvelope } from "react-icons/fa";
 
-function Contact() {
-  return (
-    <section className="contact-section">
-      <h2>Let’s Create Something Amazing Together</h2>
-      <p>Reach out to collaborate, discuss ideas, or just say hi 👋</p>
+// ✨ This component now accepts and uses the 'data' prop
+function Contact({ data }) {
+    const contactData = data?.contact;
 
-      <form
-        className="contact-form"
-        action="https://formspree.io/f/your_form_id"
-        method="POST"
-      >
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="_replyto" placeholder="Your Email" required />
-        <textarea name="message" rows="5" placeholder="Your Message" required />
-        <button type="submit">Send Message</button>
-      </form>
+    return (
+        <section className="contact-section" id="contact">
+            <h2>Get In Touch</h2>
+            <p>
+                Feel free to reach out. I'm always open to discussing new projects,
+                creative ideas, or opportunities to be part of your visions.
+            </p>
+            
+            {/* ✨ Displaying dynamic email */}
+            <a href={`mailto:${contactData?.email}`} className="email-link">
+                <FaEnvelope /> {contactData?.email || 'your-email@example.com'}
+            </a>
 
-    </section>
-  );
+            {/* ✨ Displaying dynamic social links */}
+            <div className="social-links">
+                {contactData?.linkedin && <a href={contactData.linkedin} target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>}
+                {contactData?.github && <a href={contactData.github} target="_blank" rel="noopener noreferrer"><FaGithub /></a>}
+                {contactData?.twitter && <a href={contactData.twitter} target="_blank" rel="noopener noreferrer"><FaTwitter /></a>}
+                {contactData?.facebook && <a href={contactData.facebook} target="_blank" rel="noopener noreferrer"><FaFacebook /></a>}
+                {contactData?.instagram && <a href={contactData.instagram} target="_blank" rel="noopener noreferrer"><FaInstagram /></a>}
+            </div>
+        </section>
+    );
 }
 
 export default Contact;

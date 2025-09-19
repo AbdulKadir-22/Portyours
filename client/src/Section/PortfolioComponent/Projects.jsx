@@ -1,41 +1,32 @@
+import React from 'react';
 import '../Styles/Projects.css';
-import projects from '../Data/Projects';
 import ProjectCard from '../PortfolioComponent/ProjectCard';
-import project from '../../assets/project.jpg'
 
-const images = {
-  "project" : project
-};
+// ✨ This component now receives the 'data' prop
+function Projects({ data }) {
+    const projects = data?.projects || []; // Default to an empty array
 
-function Projects() {
-  // Replace image strings with actual imports
-  const projectData = projects.map(project => ({
-    ...project,
-      image: images[project.image] || project.image
-  }));
-
-  return (
-    <section className="projects-section">
-      <div className="projects-header">
-        <h2>My Portfolio</h2>
-        <p>Some of the projects I've worked on</p>
-      </div>
-      <div className="projects-grid">
-        {projectData.map((project, index) => (
-          <ProjectCard
-            key={index}
-            title={project.title}
-            description={project.description}
-            category={project.category}
-            image={project.image}
-          />
-        ))}
-      </div>
-      <div className="projects-footer">
-        <a href="/projects" className="projects-btn">Explore Other Projects →</a>
-      </div>
-    </section>
-  );
+    return (
+        <section className="projects-section" id="projects">
+            <div className="projects-header">
+                <h2>My Portfolio</h2>
+                <p>Some of the projects I've worked on</p>
+            </div>
+            <div className="projects-grid">
+                {/* ✨ Map over the dynamic 'projects' array */}
+                {projects.map((project, index) => (
+                    <ProjectCard
+                        key={index}
+                        title={project.title}
+                        description={project.description}
+                        image={project.imageUrl} // Use the dynamic imageUrl
+                    />
+                ))}
+            </div>
+        </section>
+    );
 }
+
+// ✨ No changes needed for ProjectCard, as it already accepts these props!
 
 export default Projects;
