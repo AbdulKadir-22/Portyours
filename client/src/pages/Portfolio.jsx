@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../api/axios';
+import { useParams } from 'react-router-dom'; // ✨ Import useParams to read the URL
+import axiosInstance from '../api/axios.js';
 
 // Import all the presentational components
 import Navbar from "../Section/PortfolioComponent/Navbar";
@@ -11,38 +12,45 @@ import Contact from "../Section/PortfolioComponent/Contact";
 
 // A simple loading spinner component
 const Loader = () => (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '2rem' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '2rem', fontFamily: 'sans-serif' }}>
         Loading Portfolio...
     </div>
 );
 
 // A simple error message component
 const ErrorDisplay = ({ message }) => (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: 'red', padding: '2rem', textAlign: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#B22222', padding: '2rem', textAlign: 'center', fontFamily: 'sans-serif' }}>
         <h2>Error: {message}</h2>
     </div>
 );
 
 
 export default function Portfolio() {
-    // ✨ 1. State for data, loading, and errors
+    // ✨ 1. Get the username from the URL if it exists
+    const { username } = useParams();
+
+    // ✨ 2. State management remains the same
     const [portfolioData, setPortfolioData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // ✨ 2. Fetch data when the component mounts
+    // ✨ 3. The data fetching logic is now dynamic
     useEffect(() => {
         const fetchPortfolioData = async () => {
+            // Determine the correct API endpoint based on the URL
+            const apiUrl = username 
+                ? `/portfolio/${username}` // Public route
+                : '/portfolio';             // Private route for logged-in user
+
             try {
-                const response = await axiosInstance.get('/portfolio');
+                const response = await axiosInstance.get(apiUrl);
                 setPortfolioData(response.data); // Set the fetched data
             } catch (err) {
                 console.error("Error fetching portfolio data:", err);
-                // Handle cases where the portfolio is not found (404) vs. other server errors
                 if (err.response && err.response.status === 404) {
-                    setError("Portfolio not found. Please create one in the form page.");
+                    setError(`This portfolio could not be found. Please check the username or create a portfolio if it's yours.`);
                 } else {
-                    setError("Failed to load portfolio data. Please try again later.");
+                    setError("Failed to load portfolio data. The server might be down.");
                 }
             } finally {
                 setIsLoading(false); // Stop loading regardless of outcome
@@ -50,9 +58,9 @@ export default function Portfolio() {
         };
 
         fetchPortfolioData();
-    }, []); // The empty array ensures this runs only once on mount
+    }, [username]); // The effect re-runs if the username in the URL changes
 
-    // ✨ 3. Conditional Rendering
+    // ✨ 4. Conditional Rendering Logic
     if (isLoading) {
         return <Loader />;
     }
@@ -61,7 +69,7 @@ export default function Portfolio() {
         return <ErrorDisplay message={error} />;
     }
 
-    // ✨ 4. Pass the fetched data down to child components as props
+    // ✨ 5. Pass the fetched data down to child components
     return (
         <div>
             <Navbar />
