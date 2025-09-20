@@ -33,14 +33,14 @@ const loginUser = async (req, res) => {
 };
 
 
-//sigup user
+//signup user
 const signupUser = async (req, res) => {
-  // Destructure all the required fields from the body
-  const { firstname, lastname, email, password } = req.body;
+  // ✨ FIX: Destructure the 'username' from the request body
+  const { firstname, lastname, username, email, password } = req.body;
 
   try {
-    // Pass all fields to the signup method
-    const user = await User.signup(firstname, lastname, email, password);
+    // ✨ FIX: Pass the 'username' to the signup method in the correct order
+    const user = await User.signup(firstname, lastname, username, email, password);
 
     const token = createToken(user._id);
 

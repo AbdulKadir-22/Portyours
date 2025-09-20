@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import axiosInstance from "../api/axios"; // ✨ Use the configured axios instance
-import '../Section/Styles/Login.css'; // ✨ Import the new CSS file
+import axiosInstance from "api/axios";
+import { useAuth } from "context/AuthContext"; // ✨ Import the useAuth hook
+import 'styles/Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
