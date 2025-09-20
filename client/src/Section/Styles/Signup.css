@@ -88,6 +88,15 @@
     box-shadow: 0 0 0 3px rgba(212, 159, 3, 0.2);
 }
 
+/* ✨ NEW: Style for the hint under the username input */
+.input-hint {
+    font-size: 0.8rem;
+    color: #888;
+    margin: -1.2rem 0 1.5rem 0.2rem;
+    text-align: left;
+    width: 100%;
+}
+
 .submit-btn {
     width: 100%;
     padding: 1rem;
@@ -144,5 +153,11 @@
 
     .signup-form-section {
         padding: 2rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 0;
     }
 }

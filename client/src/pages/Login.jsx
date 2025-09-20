@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import axiosInstance from "api/axios";
-import { useAuth } from "context/AuthContext"; // ✨ Import the useAuth hook
-import 'styles/Login.css';
+import axiosInstance from "../api/axios";
+import { useAuth } from "../Context/AuthContext"; // ✨ Import the useAuth hook
+import '../Section/Styles/Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
+    const { login } = useAuth(); // ✨ Get the login function from our context
 
     const [formData, setFormData] = useState({
         email: "",
@@ -25,21 +26,17 @@ const Login = () => {
         setLoading(true);
 
         try {
-            // ✨ API call is now cleaner and uses the central instance
             const response = await axiosInstance.post("/user/login", formData);
-            const data = response.data;
+            const { token } = response.data;
 
-            if (data.token) {
-                // Success! Save the token and navigate.
-                localStorage.setItem("authToken", data.token);
-                navigate("/form");
+            if (token) {
+                // ✨ Use the context's login function to update the global state
+                login(token); 
+                navigate("/form"); // Navigate to the portfolio form after successful login
             }
         } catch (err) {
-            if (err.response?.data?.error) {
-                setError(err.response.data.error);
-            } else {
-                setError("Login failed. Please try again later.");
-            }
+            const errorMessage = err.response?.data?.error || "Login failed. Please try again.";
+            setError(errorMessage);
         } finally {
             setLoading(false);
         }

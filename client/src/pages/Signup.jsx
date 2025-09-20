@@ -4,9 +4,11 @@ import axiosInstance from "../api/axios";
 import '../Section/Styles/Signup.css'; // ✨ Import the new CSS file
 
 const Signup = () => {
+    // ✨ STATE: Added 'username' to the form data state
     const [formData, setFormData] = useState({
         firstname: "",
         lastname: "",
+        username: "",
         email: "",
         password: "",
     });
@@ -16,10 +18,19 @@ const Signup = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    // ✨ HANDLER: Updated to auto-format the username for better UX
     const handleChange = (e) => {
+        const { name, value } = e.target;
+        let processedValue = value;
+
+        // Automatically format username to lowercase and remove spaces
+        if (name === "username") {
+            processedValue = value.toLowerCase().trim();
+        }
+
         setFormData((prev) => ({
             ...prev,
-            [e.target.name]: e.target.value,
+            [name]: processedValue,
         }));
     };
 
@@ -30,6 +41,7 @@ const Signup = () => {
         setLoading(true);
 
         try {
+            // The formData now correctly includes the username
             await axiosInstance.post("/user/signup", formData);
             setSuccess("Account created successfully! Redirecting to login...");
             setTimeout(() => navigate("/login"), 2000);
@@ -73,13 +85,27 @@ const Signup = () => {
                             <input
                                 type="text"
                                 name="lastname"
-                                placeholder="Last Name"
+                                placeholder="Last Name (Optional)"
                                 className="form-input"
                                 value={formData.lastname}
                                 onChange={handleChange}
                             />
                         </div>
 
+                        {/* ✨ NEW: Username Input Field */}
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Choose a unique username"
+                            className="form-input"
+                            value={formData.username}
+                            onChange={handleChange}
+                            required
+                        />
+                        <p className="input-hint">
+                           This will be your public portfolio URL (e.g., yoursite.com/johndoe)
+                        </p>
+                        
                         <input
                             type="email"
                             name="email"
