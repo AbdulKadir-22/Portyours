@@ -1,10 +1,10 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-const connectDB = require("./config/db");
+const connectDB = require("./src/config/db");
 connectDB();
 
-const app = require("./index");
+const app = require("./src/index");
 
 const PORT = process.env.PORT || 3000;
 const appName = process.env.APP_NAME;
