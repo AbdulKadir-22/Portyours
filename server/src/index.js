@@ -3,7 +3,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173", // explicitly allow frontend
+  origin: "https://portyours.vercel.app", // explicitly allow frontend
   credentials: true                // allow cookies/auth headers
 }));
 
